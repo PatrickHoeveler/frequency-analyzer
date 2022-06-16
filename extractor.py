@@ -19,6 +19,7 @@ print(signal_wave.getparams())
 
 duration = n_frames/frame_rate
 # print(duration)
+# window = n_frames
 window = frame_rate
 # window = 10000
 print(window)
