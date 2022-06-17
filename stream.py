@@ -5,6 +5,7 @@ import librosa
 import numpy as np
 import progressbar
 from pyglet import shapes
+import json
 
 import processor
 
@@ -38,9 +39,6 @@ blocksize=512
 frequencies = []
 lines = []
 
-bar = progressbar.ProgressBar(maxval=100,
-                              widgets=[progressbar.Bar('=', '[', ']'), ' ', progressbar.Percentage()])
-
 # def callback(indata, frames, time, status):
 
 
@@ -55,18 +53,26 @@ def callback(indata, outdata, frames, time, status):
 
     if(np.any(indata)):
         print(indata)
+        
+        with open('indata.json', 'w') as file:
+            json.dump({'indata':indata.tolist()}, file)
+
         # frequencies = processor.get_frequencies(indata)
         # print(frequencies)
         # print(np.amax(indata), end='\r')
         # outdata[:] = indata
         # bass_lvl = processor.check_bass(signal=indata, sr=sr)
         frequencies = processor.get_frequencies(signal=indata, sr=sr)
+        with open('frequencies.json', 'w') as file:
+            json.dump({'frequencies': frequencies.tolist()}, file)
+        sys.exit()
         # frequencies = indata
         # frequencies = np.abs(librosa.stft(indata, n_fft=blocksize))
 
         # print(bass_lvl)
         # print(bass_lvl, end = "\r")
-        outdata[:] = indata
+
+        # outdata[:] = indata
         # update(bass_lvl)
         # processor.plot_bass(signal=indata, sr=sr)
     # print(status)
@@ -106,11 +112,11 @@ def update(dt):
 with sd.Stream(device=[5, 15], callback=callback, blocksize=blocksize, channels=2):
     # with sd.InputStream(device=7, channels=2, callback=callback):
     # sd.sleep(100)
-    init_lines(blocksize)
+    # init_lines(blocksize)
 
-    pyglet.gl.glClearColor(1, 1, 1, 1)
-    pyglet.clock.schedule_interval(update, 1/120)
-    pyglet.app.run()
+    # pyglet.gl.glClearColor(1, 1, 1, 1)
+    # pyglet.clock.schedule_interval(update, 1/120)
+    # pyglet.app.run()
 
     while(True):
         sd.sleep(1000)

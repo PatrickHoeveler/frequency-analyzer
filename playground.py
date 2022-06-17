@@ -20,6 +20,8 @@ signal_wave = wave.open(filename, 'r')
 # n_frames = signal_wave.getnframes()
 print(signal_wave.getparams())
 
+
+
 # duration = n_frames/frame_rate
 # # print(duration)
 # # window = n_frames
@@ -69,8 +71,10 @@ def plot_magnitue_spectrum(signal, sr, freq_filter):
 
 # spectograms and short term fourier transform
 signal, sr = librosa.load(filename, sr=48000, duration=10.0)
+
 print(len(signal))
 print(sr)
+
 
 # plt.plot(signal)
 # plt.show()
