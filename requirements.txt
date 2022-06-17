@@ -4,3 +4,4 @@ scipy
 pyglet
 librosa
 sounddevice
+progressbar
