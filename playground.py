@@ -1,5 +1,4 @@
 import json
-from tkinter import Y
 import wave
 import numpy as np
 import matplotlib.pyplot as plt
@@ -9,16 +8,16 @@ import librosa.display
 
 # filename = 'song.wav'
 
-filename = 'song-lowpass-100.wav'
+# filename = 'song-lowpass-100.wav'
 # filename='song-midpass-100-5000.wav'
 # filename='song-highpass-5000.wav'
 # filename='kick.wav'
 
-signal_wave = wave.open(filename, 'r')
+# signal_wave = wave.open(filename, 'r')
 # # sample_rate = 16000
 # frame_rate = signal_wave.getframerate()
 # n_frames = signal_wave.getnframes()
-print(signal_wave.getparams())
+# print(signal_wave.getparams())
 
 
 
@@ -70,16 +69,16 @@ def plot_magnitue_spectrum(signal, sr, freq_filter):
 # plot_magnitue_spectrum(left, frame_rate, 0.05)
 
 # spectograms and short term fourier transform
-signal, sr = librosa.load(filename, sr=48000, duration=10.0)
+# signal, sr = librosa.load(filename, sr=48000, duration=10.0)
 
-print(len(signal))
-print(sr)
+# print(len(signal))
+# print(sr)
 
 
 # plt.plot(signal)
 # plt.show()
 
-plot_magnitue_spectrum(signal=signal, sr=sr, freq_filter=10000)
+# plot_magnitue_spectrum(signal=signal, sr=sr, freq_filter=10000)
 
 
 # FRAME_SIZE = 2048
@@ -128,3 +127,24 @@ plot_magnitue_spectrum(signal=signal, sr=sr, freq_filter=10000)
 
 # plot_a.set_xlabel('frames')
 # plot_a.set_ylabel('amplitude')
+
+with open('librosa_signal.json') as f:
+   data = json.load(f)
+print(len(data))
+
+with open('indata.json') as f:
+   stream_data = json.load(f)
+   stream_data = stream_data['indata']
+print(len(stream_data))
+
+stream_data = [x[0] for x in stream_data]
+# stream_x = [i for i in range(len(stream_data))]
+
+plt.figure(figsize=(12, 6))
+# plt.subplot(1,2,1)
+plt.plot(data)
+# plt.subplot(1,2,2)
+plot_magnitue_spectrum(signal=data, sr=48000, freq_filter=10000)
+# plt.plot(data)
+
+plt.show()
