@@ -54,8 +54,9 @@ def plot_magnitue_spectrum(signal, sr, freq_filter):
     magnitude_spectrum = np.abs(ft)
     frequency = np.linspace(0, sr, len(magnitude_spectrum))
     # num_frequency_bins = int(len(frequency) * f_ratio)
-    frequency = [x for x in frequency if x < freq_filter]
+    # frequency = [x for x in frequency if x < freq_filter]
     magnitude_spectrum = magnitude_spectrum[:len(frequency)]
+
     if(any(magnitude_spectrum>5000)):
         print("bass detected")
 
@@ -140,11 +141,14 @@ print(len(stream_data))
 stream_data = [x[0] for x in stream_data]
 # stream_x = [i for i in range(len(stream_data))]
 
+print(len(data))
+print(data[10000])
+
 plt.figure(figsize=(12, 6))
 # plt.subplot(1,2,1)
 plt.plot(data)
 # plt.subplot(1,2,2)
-plot_magnitue_spectrum(signal=data, sr=48000, freq_filter=10000)
+# plot_magnitue_spectrum(signal=data, sr=512, freq_filter=20000)
 # plt.plot(data)
 
 plt.show()
